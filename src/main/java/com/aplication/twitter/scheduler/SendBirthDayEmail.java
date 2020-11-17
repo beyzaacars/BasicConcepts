@@ -1,6 +1,6 @@
-package com.aplication.twitter.scheduledTasks;
+package com.aplication.twitter.scheduler;
 
-import com.aplication.twitter.entity.User.User;
+import com.aplication.twitter.entity.user.User;
 import com.aplication.twitter.repository.UserRepository;
 import com.aplication.twitter.service.EmailService;
 import com.aplication.twitter.service.UserService;
@@ -14,21 +14,21 @@ import java.util.List;
 import java.util.TimeZone;
 
 @Component
-public class ScheduledTasks {
+public class SendBirthDayEmail {
 
     @Autowired
     private final UserRepository userRepository;
     @Autowired
     private final EmailService emailService;
 
-    public ScheduledTasks(UserRepository userRepository, UserService userService, EmailService emailService) {
+    public SendBirthDayEmail(UserRepository userRepository, UserService userService, EmailService emailService) {
         this.userRepository = userRepository;
 
         this.emailService = emailService;
     }
 
 
-    @Scheduled(cron = "", zone = "Europe/Istanbul")
+    @Scheduled(cron = "0 0 10 * * *", zone = "Europe/Istanbul")
     public void birthDayMail() {
         Date date=new Date();
         Calendar cal = Calendar.getInstance(TimeZone.getTimeZone("Europe/Istanbul"));

@@ -1,21 +1,15 @@
 package com.aplication.twitter.service;
 
-import com.aplication.twitter.entity.User.User;
+import com.aplication.twitter.entity.user.User;
 import com.aplication.twitter.repository.UserRepository;
-import com.aplication.twitter.resource.HomeResources;
-import com.aplication.twitter.util.CustomErrorType;
-import javassist.NotFoundException;
-import net.bytebuddy.asm.Advice;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
-import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
 import javax.persistence.EntityNotFoundException;
-import java.util.Optional;
-import java.util.logging.Logger;
 
 @Service
 public class UserService {
@@ -26,9 +20,18 @@ public class UserService {
     public UserService(UserRepository repository) {
         this.repository = repository;
     }
+    @Bean
+    public BCryptPasswordEncoder bCryptPasswordEncoder() {
+        return new BCryptPasswordEncoder();
+    }
+
+    @Autowired
+    private BCryptPasswordEncoder bCryptPasswordEncoder;
 
     public void addUser(User user) throws Exception {
       //  UserRepository.save;
+        String encodedpassword = bCryptPasswordEncoder.encode(user.getPassword());
+        user.setPassword(encodedpassword);
         if(repository.existsByUserName(user.getUserName())){
             throw new Exception("Bu userName kayıtlı!");
         }
