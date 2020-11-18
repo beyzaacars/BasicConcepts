@@ -1,6 +1,6 @@
 package com.aplication.twitter.repository;
 
-import com.aplication.twitter.entity.User.User;
+import com.aplication.twitter.entity.user.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Date;

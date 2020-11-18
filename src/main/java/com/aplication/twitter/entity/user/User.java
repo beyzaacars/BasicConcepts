@@ -1,4 +1,4 @@
-package com.aplication.twitter.entity.User;
+package com.aplication.twitter.entity.user;
 
 import javax.persistence.*;
 import java.util.Date;

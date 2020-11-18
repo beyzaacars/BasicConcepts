@@ -1,7 +1,7 @@
 package com.aplication.twitter.security;
 
 import com.aplication.twitter.repository.UserRepository;
-import com.aplication.twitter.entity.User.User;
+import com.aplication.twitter.entity.user.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;

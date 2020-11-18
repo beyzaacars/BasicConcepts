@@ -1,6 +1,6 @@
 package com.aplication.twitter.security;
 
-import com.aplication.twitter.entity.User.User;
+import com.aplication.twitter.entity.user.User;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;

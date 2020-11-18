@@ -1,6 +1,6 @@
 package com.aplication.twitter.resource;
 
-import com.aplication.twitter.entity.User.User;
+import com.aplication.twitter.entity.user.User;
 import com.aplication.twitter.service.EmailService;
 import com.aplication.twitter.service.TwitterService;
 import com.aplication.twitter.service.UserService;
@@ -11,7 +11,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 import twitter4j.TwitterException;
 
-@RestController()
+@RestController
 public class HomeResources {
 
     @Autowired
@@ -21,13 +21,6 @@ public class HomeResources {
 
     @Autowired
     private UserService userService;
-
-    @Bean
-    public BCryptPasswordEncoder bCryptPasswordEncoder() {
-        return new BCryptPasswordEncoder();
-    }
-    @Autowired
-    private BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @GetMapping("/")
     public String home(){
@@ -46,8 +39,6 @@ public class HomeResources {
 
     @PostMapping("/yenikayit")
     public String createUser(@RequestBody User user) throws Exception {
-        String encodedpassword = bCryptPasswordEncoder.encode(user.getPassword());
-        user.setPassword(encodedpassword);
         userService.addUser(user);
         emailService.sendMail(user.getEmail(),"Aramıza hoşgeldin!","üyeliğiniz oluşturuldu, bizi takipte kalın :)");
 
